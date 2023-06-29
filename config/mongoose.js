@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { MOGOURI } = require("./keys");
 
-mongoose.connect(MOGOURI || "mongodb://127.0.0.1:27017/Blog", {
+mongoose.connect(/*MOGOURI || */ "mongodb://127.0.0.1:27017/Blog", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

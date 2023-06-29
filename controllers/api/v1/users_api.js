@@ -33,7 +33,7 @@ module.exports.signUp = async function (req, res) {
         token: jwt.sign(user.toJSON(), JWT_SECRET, {
           expiresIn: "1000000",
         }),
-        user: user,
+        //user: user,
       },
     });
   } catch (err) {
@@ -69,7 +69,7 @@ module.exports.signIn = async function (req, res) {
         token: jwt.sign(user.toJSON(), JWT_SECRET, {
           expiresIn: "1000000",
         }),
-        user: user,
+        //user: user,
       },
     });
   } catch (err) {
