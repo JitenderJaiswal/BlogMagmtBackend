@@ -1,9 +1,18 @@
+const jwt = require("jsonwebtoken");
 const Post = require("../../../models/post");
 
 module.exports.createPost = async function (req, res) {
   try {
     const { title, content } = req.body;
-    let post = await Post.create({ title: title, content: content });
+
+    const token = req.headers.authorization.split(" ")[1];
+    const jwt_payload = jwt.decode(token);
+
+    let post = await Post.create({
+      title: title,
+      content: content,
+      authorId: jwt_payload._id,
+    });
 
     return res.status(200).json({
       message: "Post created",
@@ -21,7 +30,10 @@ module.exports.createPost = async function (req, res) {
 
 module.exports.readPosts = async function (req, res) {
   try {
-    let posts = await Post.find({}).sort({ createdAt: -1 });
+    let posts = await Post.find()
+      .populate("authorId", ["name"])
+      .sort({ createdAt: -1 });
+
     return res.status(200).json({
       message: "List of posts",
       success: true,

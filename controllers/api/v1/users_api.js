@@ -43,7 +43,6 @@ module.exports.signUp = async function (req, res) {
 //create session
 module.exports.signIn = async function (req, res) {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
 
     let user = await User.findOne({ email: email });
